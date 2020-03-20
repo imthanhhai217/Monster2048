@@ -170,6 +170,7 @@ public class Data {
                                 twoDimensionArray[i][j] = so * 2;
                                 twoDimensionArray[i][k] = 0;
                                 score += so;
+
                                 break;
                             } else {
                                 break;
@@ -306,47 +307,41 @@ public class Data {
     }
 
     public boolean checkCanMove() {
-        int countZero = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (twoDimensionArray[i][j] == 0) {
-                    countZero++;
-                    break;
+                    return true;
                 }
             }
         }
-        if (countZero > 0) {
-            return true;
-        } else {
-            //Duyet theo dong
-            int pointerRow = 0;
-            for (int row = 0; row < 4; row++) {
-                for (int k = 1; k < 4; k++) {
-                    if (twoDimensionArray[row][pointerRow] == twoDimensionArray[row][k]) {
-                        return true;
-                    } else {
-                        pointerRow++;
-                        continue;
-                    }
-                }
-                pointerRow = 0;
-            }
 
-            //Duyet theo cot
-            int pointerCol = 0;
-            for (int col = 0; col < 4; col++) {
-                for (int k = 1; k < 4; k++) {
-                    if (twoDimensionArray[pointerCol][col] == twoDimensionArray[k][col]) {
-                        return true;
-                    } else {
-                        pointerCol++;
-                        continue;
-                    }
+        //Duyet theo dong
+        int pointerRow = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int k = 1; k < 4; k++) {
+                if (twoDimensionArray[row][pointerRow] == twoDimensionArray[row][k]) {
+                    return true;
+                } else {
+                    pointerRow++;
+                    continue;
                 }
-                pointerCol = 0;
             }
-            return false;
+            pointerRow = 0;
         }
-//        return false;
+
+        //Duyet theo cot
+        int pointerCol = 0;
+        for (int col = 0; col < 4; col++) {
+            for (int k = 1; k < 4; k++) {
+                if (twoDimensionArray[pointerCol][col] == twoDimensionArray[k][col]) {
+                    return true;
+                } else {
+                    pointerCol++;
+                    continue;
+                }
+            }
+            pointerCol = 0;
+        }
+        return false;
     }
 }
